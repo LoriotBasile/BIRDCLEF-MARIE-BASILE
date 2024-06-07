@@ -274,7 +274,7 @@ PATIENCE = 5
 # %% [markdown]
 # ADAM
 
-# %% [code] {"execution":{"iopub.status.busy":"2024-06-05T10:22:59.315313Z","iopub.execute_input":"2024-06-05T10:22:59.315715Z","iopub.status.idle":"2024-06-05T11:17:21.778191Z","shell.execute_reply.started":"2024-06-05T10:22:59.315678Z","shell.execute_reply":"2024-06-05T11:17:21.777291Z"}}
+# %% [code] {"execution":{"iopub.status.busy":"2024-06-05T10:22:59.315313Z","iopub.execute_input":"2024-06-05T10:22:59.315715Z","iopub.status.idle":"2024-06-05T11:17:21.778191Z","shell.execute_reply.started":"2024-06-05T10:22:59.315678Z","shell.execute_reply":"2024-06-05T11:17:21.777291Z"},"jupyter":{"outputs_hidden":false}}
 def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = AudioLSTM(n_feature=168, out_feature=OUT_FEATURE).to(device)
