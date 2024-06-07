@@ -1,11 +1,10 @@
 # %% [markdown]
-# # VERSION TRAIN 
-# 
+# # VERSION TRAIN Basile Marie
 
 # %% [markdown] {"papermill":{"duration":0.065343,"end_time":"2022-03-08T03:18:11.885586","exception":false,"start_time":"2022-03-08T03:18:11.820243","status":"completed"},"tags":[]}
 # # Import Libraries
 
-# %% [code] {"papermill":{"duration":2.632068,"end_time":"2022-03-08T03:18:14.585094","exception":false,"start_time":"2022-03-08T03:18:11.953026","status":"completed"},"tags":[],"_kg_hide-output":true,"execution":{"iopub.status.busy":"2024-06-06T09:52:41.561392Z","iopub.execute_input":"2024-06-06T09:52:41.561667Z","iopub.status.idle":"2024-06-06T09:53:00.230168Z","shell.execute_reply.started":"2024-06-06T09:52:41.561642Z","shell.execute_reply":"2024-06-06T09:53:00.228970Z"}}
+# %% [code] {"papermill":{"duration":2.632068,"end_time":"2022-03-08T03:18:14.585094","exception":false,"start_time":"2022-03-08T03:18:11.953026","status":"completed"},"tags":[],"_kg_hide-output":true,"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:19:31.777441Z","iopub.execute_input":"2024-06-07T08:19:31.777749Z","iopub.status.idle":"2024-06-07T08:19:50.445021Z","shell.execute_reply.started":"2024-06-07T08:19:31.777723Z","shell.execute_reply":"2024-06-07T08:19:50.444066Z"}}
 import os
 os.environ["KERAS_BACKEND"] = "jax"  # "jax" or "tensorflow" or "torch" 
 
@@ -33,15 +32,15 @@ cmap = mpl.cm.get_cmap('coolwarm')
 # %% [markdown] {"papermill":{"duration":0.065649,"end_time":"2022-03-08T03:18:14.717311","exception":false,"start_time":"2022-03-08T03:18:14.651662","status":"completed"},"tags":[]}
 # ## Library Version
 
-# %% [code] {"papermill":{"duration":0.155095,"end_time":"2022-03-08T03:18:14.939054","exception":false,"start_time":"2022-03-08T03:18:14.783959","status":"completed"},"tags":[],"execution":{"iopub.status.busy":"2024-06-06T09:53:00.231891Z","iopub.execute_input":"2024-06-06T09:53:00.232437Z","iopub.status.idle":"2024-06-06T09:53:00.237242Z","shell.execute_reply.started":"2024-06-06T09:53:00.232410Z","shell.execute_reply":"2024-06-06T09:53:00.236418Z"}}
+# %% [code] {"papermill":{"duration":0.155095,"end_time":"2022-03-08T03:18:14.939054","exception":false,"start_time":"2022-03-08T03:18:14.783959","status":"completed"},"tags":[],"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:19:50.450224Z","iopub.execute_input":"2024-06-07T08:19:50.450566Z","iopub.status.idle":"2024-06-07T08:19:50.455867Z","shell.execute_reply.started":"2024-06-07T08:19:50.450535Z","shell.execute_reply":"2024-06-07T08:19:50.454800Z"}}
 print("TensorFlow:", tf.__version__)
 print("Keras:", keras.__version__)
 print("KerasCV:", keras_cv.__version__)
 
 # %% [markdown] {"papermill":{"duration":0.066353,"end_time":"2022-03-08T03:18:18.099835","exception":false,"start_time":"2022-03-08T03:18:18.033482","status":"completed"},"tags":[]}
-# # Configuration 
+# # Configuration
 
-# %% [code] {"papermill":{"duration":0.156464,"end_time":"2022-03-08T03:18:18.322809","exception":false,"start_time":"2022-03-08T03:18:18.166345","status":"completed"},"tags":[],"execution":{"iopub.status.busy":"2024-06-06T09:53:00.238316Z","iopub.execute_input":"2024-06-06T09:53:00.238580Z","iopub.status.idle":"2024-06-06T09:53:00.277417Z","shell.execute_reply.started":"2024-06-06T09:53:00.238557Z","shell.execute_reply":"2024-06-06T09:53:00.276724Z"}}
+# %% [code] {"papermill":{"duration":0.156464,"end_time":"2022-03-08T03:18:18.322809","exception":false,"start_time":"2022-03-08T03:18:18.166345","status":"completed"},"tags":[],"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:19:50.458644Z","iopub.execute_input":"2024-06-07T08:19:50.459044Z","iopub.status.idle":"2024-06-07T08:19:50.504617Z","shell.execute_reply.started":"2024-06-07T08:19:50.459004Z","shell.execute_reply":"2024-06-07T08:19:50.503915Z"}}
 class CFG:
     seed = 42
     
@@ -51,7 +50,7 @@ class CFG:
     
     # Audio duration, sample rate, and length
     duration = 15 # second
-    sample_rate = 32000
+    sample_rate = 22050
     audio_len = duration*sample_rate
     
     # STFT parameters
@@ -76,22 +75,21 @@ class CFG:
     name2label = {v:k for k,v in label2name.items()}
 
 # %% [markdown] {"papermill":{"duration":0.070351,"end_time":"2022-03-08T03:18:18.46058","exception":false,"start_time":"2022-03-08T03:18:18.390229","status":"completed"},"tags":[]}
-# # Reproducibility 
-# 
+# # Reproducibility
 
-# %% [code] {"papermill":{"duration":0.153451,"end_time":"2022-03-08T03:18:18.685056","exception":false,"start_time":"2022-03-08T03:18:18.531605","status":"completed"},"tags":[],"_kg_hide-input":true,"execution":{"iopub.status.busy":"2024-06-06T09:53:00.279585Z","iopub.execute_input":"2024-06-06T09:53:00.279892Z","iopub.status.idle":"2024-06-06T09:53:00.284443Z","shell.execute_reply.started":"2024-06-06T09:53:00.279867Z","shell.execute_reply":"2024-06-06T09:53:00.283224Z"}}
+# %% [code] {"papermill":{"duration":0.153451,"end_time":"2022-03-08T03:18:18.685056","exception":false,"start_time":"2022-03-08T03:18:18.531605","status":"completed"},"tags":[],"_kg_hide-input":true,"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:19:50.505485Z","iopub.execute_input":"2024-06-07T08:19:50.505713Z","iopub.status.idle":"2024-06-07T08:19:50.510070Z","shell.execute_reply.started":"2024-06-07T08:19:50.505692Z","shell.execute_reply":"2024-06-07T08:19:50.509117Z"}}
 tf.keras.utils.set_random_seed(CFG.seed)
 
 # %% [markdown]
 # # Dataset Path
 
-# %% [code] {"_kg_hide-input":true,"execution":{"iopub.status.busy":"2024-06-06T09:53:00.285304Z","iopub.execute_input":"2024-06-06T09:53:00.285539Z","iopub.status.idle":"2024-06-06T09:53:00.293586Z","shell.execute_reply.started":"2024-06-06T09:53:00.285515Z","shell.execute_reply":"2024-06-06T09:53:00.292856Z"}}
+# %% [code] {"_kg_hide-input":true,"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:19:50.511149Z","iopub.execute_input":"2024-06-07T08:19:50.511432Z","iopub.status.idle":"2024-06-07T08:19:50.521551Z","shell.execute_reply.started":"2024-06-07T08:19:50.511410Z","shell.execute_reply":"2024-06-07T08:19:50.520682Z"}}
 BASE_PATH = '/kaggle/input/birdclef-2024'
 
 # %% [markdown] {"papermill":{"duration":0.067107,"end_time":"2022-03-08T03:18:26.962626","exception":false,"start_time":"2022-03-08T03:18:26.895519","status":"completed"},"tags":[]}
 # # Meta Data 📖
 
-# %% [code] {"papermill":{"duration":0.241649,"end_time":"2022-03-08T03:18:27.408813","exception":false,"start_time":"2022-03-08T03:18:27.167164","status":"completed"},"tags":[],"_kg_hide-input":true,"execution":{"iopub.status.busy":"2024-06-06T09:53:00.294742Z","iopub.execute_input":"2024-06-06T09:53:00.295023Z","iopub.status.idle":"2024-06-06T09:53:00.536878Z","shell.execute_reply.started":"2024-06-06T09:53:00.295000Z","shell.execute_reply":"2024-06-06T09:53:00.535861Z"}}
+# %% [code] {"papermill":{"duration":0.241649,"end_time":"2022-03-08T03:18:27.408813","exception":false,"start_time":"2022-03-08T03:18:27.167164","status":"completed"},"tags":[],"_kg_hide-input":true,"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:19:50.522535Z","iopub.execute_input":"2024-06-07T08:19:50.522821Z","iopub.status.idle":"2024-06-07T08:19:50.798617Z","shell.execute_reply.started":"2024-06-07T08:19:50.522798Z","shell.execute_reply":"2024-06-07T08:19:50.797645Z"}}
 df = pd.read_csv(f'{BASE_PATH}/train_metadata.csv')
 df['filepath'] = BASE_PATH + '/train_audio/' + df.filename
 df['target'] = df.primary_label.map(CFG.name2label)
@@ -102,12 +100,14 @@ df['xc_id'] = df.filepath.map(lambda x: x.split('/')[-1].split('.')[0])
 df.head(2)
 
 # %% [markdown]
-# # EDA 
+# # EDA
 
 # %% [markdown]
 # ## Utility
+# Import de l'audio
+# Conversion d'un signal audio en un spectrogramme en utilisant la transformation de Fourier et l'échelle de Mel, puis normalise le spectrogramme.
 
-# %% [code] {"_kg_hide-input":true,"execution":{"iopub.status.busy":"2024-06-06T09:53:00.537914Z","iopub.execute_input":"2024-06-06T09:53:00.538187Z","iopub.status.idle":"2024-06-06T09:53:00.549369Z","shell.execute_reply.started":"2024-06-06T09:53:00.538164Z","shell.execute_reply":"2024-06-06T09:53:00.548331Z"}}
+# %% [code] {"_kg_hide-input":true,"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:19:50.799839Z","iopub.execute_input":"2024-06-07T08:19:50.800122Z","iopub.status.idle":"2024-06-07T08:19:50.811446Z","shell.execute_reply.started":"2024-06-07T08:19:50.800099Z","shell.execute_reply":"2024-06-07T08:19:50.810430Z"}}
 def load_audio(filepath):
     audio, sr = librosa.load(filepath)
     return audio, sr
@@ -165,7 +165,7 @@ def display_audio(row):
 # %% [markdown]
 # ## Sample 1
 
-# %% [code] {"_kg_hide-input":true,"execution":{"iopub.status.busy":"2024-06-06T09:53:00.550514Z","iopub.execute_input":"2024-06-06T09:53:00.550826Z","iopub.status.idle":"2024-06-06T09:53:16.660490Z","shell.execute_reply.started":"2024-06-06T09:53:00.550780Z","shell.execute_reply":"2024-06-06T09:53:16.659679Z"}}
+# %% [code] {"_kg_hide-input":true,"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:19:50.812440Z","iopub.execute_input":"2024-06-07T08:19:50.812711Z","iopub.status.idle":"2024-06-07T08:20:07.154946Z","shell.execute_reply.started":"2024-06-07T08:19:50.812687Z","shell.execute_reply":"2024-06-07T08:20:07.153996Z"}}
 row = df.iloc[48]
 
 # Display audio
@@ -174,7 +174,7 @@ display_audio(row)
 # %% [markdown]
 # ## Sample 2
 
-# %% [code] {"_kg_hide-input":true,"execution":{"iopub.status.busy":"2024-06-06T09:58:34.803015Z","iopub.execute_input":"2024-06-06T09:58:34.803429Z","iopub.status.idle":"2024-06-06T09:58:37.667824Z","shell.execute_reply.started":"2024-06-06T09:58:34.803394Z","shell.execute_reply":"2024-06-06T09:58:37.666873Z"}}
+# %% [code] {"_kg_hide-input":true,"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:20:07.158103Z","iopub.execute_input":"2024-06-07T08:20:07.158715Z","iopub.status.idle":"2024-06-07T08:20:08.868997Z","shell.execute_reply.started":"2024-06-07T08:20:07.158686Z","shell.execute_reply":"2024-06-07T08:20:08.868093Z"}}
 row = df.iloc[180]
 
 # Display audio
@@ -183,7 +183,7 @@ display_audio(row)
 # %% [markdown]
 # ## Sample 3
 
-# %% [code] {"_kg_hide-input":true,"execution":{"iopub.status.busy":"2024-06-06T09:53:18.304187Z","iopub.execute_input":"2024-06-06T09:53:18.304789Z","iopub.status.idle":"2024-06-06T09:53:19.949677Z","shell.execute_reply.started":"2024-06-06T09:53:18.304756Z","shell.execute_reply":"2024-06-06T09:53:19.948683Z"}}
+# %% [code] {"_kg_hide-input":true,"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:20:08.870341Z","iopub.execute_input":"2024-06-07T08:20:08.870691Z","iopub.status.idle":"2024-06-07T08:20:10.580459Z","shell.execute_reply.started":"2024-06-07T08:20:08.870660Z","shell.execute_reply":"2024-06-07T08:20:10.579506Z"}}
 row = df.iloc[50]
 
 # Display audio
@@ -191,10 +191,9 @@ display_audio(row)
 
 # %% [markdown] {"papermill":{"duration":0.09524,"end_time":"2022-03-08T03:18:34.861029","exception":false,"start_time":"2022-03-08T03:18:34.765789","status":"completed"},"tags":[]}
 # # Data Split
-# Following code will split the data into folds using target stratification.
-# > **Note:** Some classess have too few samples thus not each fold contains all the classes. 
+# Divise les données en ensembles d'entraînement et de validation en utilisant une fraction de 20% pour la validation.(surapprentissage).
 
-# %% [code] {"papermill":{"duration":0.386301,"end_time":"2022-03-08T03:18:35.325064","exception":false,"start_time":"2022-03-08T03:18:34.938763","status":"completed"},"tags":[],"_kg_hide-input":false,"_kg_hide-output":true,"execution":{"iopub.status.busy":"2024-06-06T09:53:19.950782Z","iopub.execute_input":"2024-06-06T09:53:19.951136Z","iopub.status.idle":"2024-06-06T09:53:20.096513Z","shell.execute_reply.started":"2024-06-06T09:53:19.951111Z","shell.execute_reply":"2024-06-06T09:53:20.095596Z"}}
+# %% [code] {"papermill":{"duration":0.386301,"end_time":"2022-03-08T03:18:35.325064","exception":false,"start_time":"2022-03-08T03:18:34.938763","status":"completed"},"tags":[],"_kg_hide-input":false,"_kg_hide-output":true,"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:20:10.581707Z","iopub.execute_input":"2024-06-07T08:20:10.582049Z","iopub.status.idle":"2024-06-07T08:20:10.723901Z","shell.execute_reply.started":"2024-06-07T08:20:10.582018Z","shell.execute_reply":"2024-06-07T08:20:10.722942Z"}}
 # Import required packages
 from sklearn.model_selection import train_test_split
 
@@ -203,15 +202,13 @@ train_df, valid_df = train_test_split(df, test_size=0.2)
 print(f"Num Train: {len(train_df)} | Num Valid: {len(valid_df)}")
 
 # %% [markdown] {"papermill":{"duration":0.152812,"end_time":"2022-03-08T03:18:48.676686","exception":false,"start_time":"2022-03-08T03:18:48.523874","status":"completed"},"tags":[]}
-# # Data Loader 
+# # Data Loader
 
 # %% [markdown]
 # ## Decoders
-# 
-# The following code will decode the raw audio from `.ogg` file and also decode the spectrogram from the `audio` file. Additionally, we will apply Z-Score standardization and Min-Max normalization to ensure consistent inputs to the model.
-# 
+# Ces fonctions permettent de décoder les fichiers audio, d'appliquer des transformations pour obtenir un spectrogramme, et de préparer les données pour l'entraînement.
 
-# %% [code] {"papermill":{"duration":0.251237,"end_time":"2022-03-08T03:18:49.079346","exception":false,"start_time":"2022-03-08T03:18:48.828109","status":"completed"},"tags":[],"_kg_hide-input":true,"execution":{"iopub.status.busy":"2024-06-06T09:53:20.098063Z","iopub.execute_input":"2024-06-06T09:53:20.098564Z","iopub.status.idle":"2024-06-06T09:53:20.114577Z","shell.execute_reply.started":"2024-06-06T09:53:20.098528Z","shell.execute_reply":"2024-06-06T09:53:20.113605Z"}}
+# %% [code] {"papermill":{"duration":0.251237,"end_time":"2022-03-08T03:18:49.079346","exception":false,"start_time":"2022-03-08T03:18:48.828109","status":"completed"},"tags":[],"_kg_hide-input":true,"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:20:10.725320Z","iopub.execute_input":"2024-06-07T08:20:10.725674Z","iopub.status.idle":"2024-06-07T08:20:10.744220Z","shell.execute_reply.started":"2024-06-07T08:20:10.725641Z","shell.execute_reply":"2024-06-07T08:20:10.743363Z"}}
 # Decodes Audio
 def build_decoder(with_labels=True, dim=1024):
     def get_audio(filepath):
@@ -284,14 +281,11 @@ def build_decoder(with_labels=True, dim=1024):
 
     return decode_with_labels if with_labels else decode
 
-
 # %% [markdown] {"papermill":{"duration":0.150182,"end_time":"2022-03-08T03:18:49.38214","exception":false,"start_time":"2022-03-08T03:18:49.231958","status":"completed"},"tags":[]}
 # ## Augmenters
-# Following code will apply augmentations to spectrogram data. In this notebook, we will use MixUp, CutOut (TimeMasking and FreqMasking) from KerasCV.
 # 
-# > Note that, these augmentations will be applied to batch of spectrograms rather than single spectrograms.
 
-# %% [code] {"execution":{"iopub.status.busy":"2024-06-06T09:53:20.115879Z","iopub.execute_input":"2024-06-06T09:53:20.116688Z","iopub.status.idle":"2024-06-06T09:53:20.127484Z","shell.execute_reply.started":"2024-06-06T09:53:20.116662Z","shell.execute_reply":"2024-06-06T09:53:20.126650Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:20:10.745607Z","iopub.execute_input":"2024-06-07T08:20:10.745952Z","iopub.status.idle":"2024-06-07T08:20:10.757172Z","shell.execute_reply.started":"2024-06-07T08:20:10.745921Z","shell.execute_reply":"2024-06-07T08:20:10.756253Z"}}
 def build_augmenter():
     augmenters = [
         keras_cv.layers.MixUp(alpha=0.4),
@@ -312,13 +306,9 @@ def build_augmenter():
 
 # %% [markdown] {"papermill":{"duration":0.152217,"end_time":"2022-03-08T03:18:50.097623","exception":false,"start_time":"2022-03-08T03:18:49.945406","status":"completed"},"tags":[]}
 # ## Data Pipeline
-# Following code builds the complete pipeline of the data flow. It uses `tf.data.Dataset` for data processing. Here are some cool features of `tf.data`,
-# * We can build complex input pipelines from simple, reusable pieces using`tf.data` API . For example, the pipeline for an audio model might aggregate data from files in a distributed file system, apply random transformation/augmentation to each audio/spectrogram, and merge randomly selected data into a batch for training.
-# * Moreover `tf.data` API provides a `tf.data.Dataset` feature that represents a sequence of components where each component comprises one or more pieces. For instance, in an audio pipeline, a component might be a single training example, with a pair of tensor pieces representing the audio and its label.
 # 
-# Check out this [doc](https://www.tensorflow.org/guide/data) if you want to learn more about `tf.data`.
 
-# %% [code] {"papermill":{"duration":0.240881,"end_time":"2022-03-08T03:18:50.489717","exception":false,"start_time":"2022-03-08T03:18:50.248836","status":"completed"},"tags":[],"execution":{"iopub.status.busy":"2024-06-06T09:53:20.128541Z","iopub.execute_input":"2024-06-06T09:53:20.128840Z","iopub.status.idle":"2024-06-06T09:53:20.137707Z","shell.execute_reply.started":"2024-06-06T09:53:20.128794Z","shell.execute_reply":"2024-06-06T09:53:20.136860Z"}}
+# %% [code] {"papermill":{"duration":0.240881,"end_time":"2022-03-08T03:18:50.489717","exception":false,"start_time":"2022-03-08T03:18:50.248836","status":"completed"},"tags":[],"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:20:10.758318Z","iopub.execute_input":"2024-06-07T08:20:10.758636Z","iopub.status.idle":"2024-06-07T08:20:10.767575Z","shell.execute_reply.started":"2024-06-07T08:20:10.758601Z","shell.execute_reply":"2024-06-07T08:20:10.766691Z"}}
 def build_dataset(paths, labels=None, batch_size=32, 
                   decode_fn=None, augment_fn=None, cache=True,
                   augment=False, shuffle=2048):
@@ -347,7 +337,7 @@ def build_dataset(paths, labels=None, batch_size=32,
 # %% [markdown]
 # ## Build Train and Valid Dataloaders
 
-# %% [code] {"execution":{"iopub.status.busy":"2024-06-06T09:53:20.138914Z","iopub.execute_input":"2024-06-06T09:53:20.139400Z","iopub.status.idle":"2024-06-06T09:53:24.298021Z","shell.execute_reply.started":"2024-06-06T09:53:20.139375Z","shell.execute_reply":"2024-06-06T09:53:24.296736Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:20:10.768700Z","iopub.execute_input":"2024-06-07T08:20:10.768954Z","iopub.status.idle":"2024-06-07T08:20:15.127263Z","shell.execute_reply.started":"2024-06-07T08:20:10.768932Z","shell.execute_reply":"2024-06-07T08:20:15.126489Z"}}
 # Train
 train_paths = train_df.filepath.values
 train_labels = train_df.target.values
@@ -362,9 +352,9 @@ valid_ds = build_dataset(valid_paths, valid_labels, batch_size=CFG.batch_size,
 
 # %% [markdown]
 # # Visualization 
-# To ensure our pipeline is generating **spectrogram** and its associate **label** correctly, we'll check some samples from a batch.
+# 
 
-# %% [code] {"papermill":{"duration":0.328513,"end_time":"2022-03-08T03:19:59.512224","exception":false,"start_time":"2022-03-08T03:19:59.183711","status":"completed"},"tags":[],"_kg_hide-input":true,"execution":{"iopub.status.busy":"2024-06-06T09:53:24.299348Z","iopub.execute_input":"2024-06-06T09:53:24.299739Z","iopub.status.idle":"2024-06-06T09:53:24.309583Z","shell.execute_reply.started":"2024-06-06T09:53:24.299704Z","shell.execute_reply":"2024-06-06T09:53:24.308651Z"}}
+# %% [code] {"papermill":{"duration":0.328513,"end_time":"2022-03-08T03:19:59.512224","exception":false,"start_time":"2022-03-08T03:19:59.183711","status":"completed"},"tags":[],"_kg_hide-input":true,"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:20:15.128787Z","iopub.execute_input":"2024-06-07T08:20:15.129122Z","iopub.status.idle":"2024-06-07T08:20:15.136726Z","shell.execute_reply.started":"2024-06-07T08:20:15.129088Z","shell.execute_reply":"2024-06-07T08:20:15.135813Z"}}
 def plot_batch(batch, row=3, col=3, label2name=None,):
     """Plot one batch data"""
     if isinstance(batch, tuple) or isinstance(batch, list):
@@ -389,23 +379,16 @@ def plot_batch(batch, row=3, col=3, label2name=None,):
     plt.tight_layout()
     plt.show()
 
-# %% [code] {"_kg_hide-input":true,"execution":{"iopub.status.busy":"2024-06-06T09:53:24.310753Z","iopub.execute_input":"2024-06-06T09:53:24.311709Z","iopub.status.idle":"2024-06-06T09:53:38.742077Z","shell.execute_reply.started":"2024-06-06T09:53:24.311675Z","shell.execute_reply":"2024-06-06T09:53:38.741111Z"}}
+# %% [code] {"_kg_hide-input":true,"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:20:15.138021Z","iopub.execute_input":"2024-06-07T08:20:15.138307Z","iopub.status.idle":"2024-06-07T08:20:29.399759Z","shell.execute_reply.started":"2024-06-07T08:20:15.138267Z","shell.execute_reply":"2024-06-07T08:20:29.398798Z"}}
 sample_ds = train_ds.take(100)
 batch = next(iter(sample_ds))
 plot_batch(batch, label2name=CFG.label2name)
 
 # %% [markdown] {"papermill":{"duration":0.182769,"end_time":"2022-03-08T03:20:04.861966","exception":false,"start_time":"2022-03-08T03:20:04.679197","status":"completed"},"tags":[]}
-# # 🤖 Modeling
-# 
-# Building a model for an audio recognition task with spectrograms as input is quite straightforward, as it is very similar to image classification. This is because the shape of spectrogram data is very similar to image data. In this notebook, to perform the audio recognition task, we will utilize the `EfficientNetV2` ImageNet-pretrained model as the backbone. Even though this backbone is pretrained with ImageNet data instead of spectrogram data, we can leverage transfer learning to adapt it to our spectrogram-based task.
-# 
-# > Note that we can train our model on any duration audio file (here we are using `10 seconds`), but we will always infer on `5-second` audio files (as per competition rules). To facilitate this, we have set the model input shape to `(None, None, 3)`, which will allow us to have variable-length input during training and inference.
-# 
-# 
-# In case you are wondering, **Why not train and infer on both `5-second`?** In the train data, we have long audio files, but we are not sure which part of the audio contains the labeled bird's song. In other words, this is weakly labeled. To ensure the provided label is accurately suited to the audio, we are using a larger audio size than `5 seconds`. You are welcome to try out different audio lengths for training.
+# # Modeling
 # 
 
-# %% [code] {"papermill":{"duration":1.239321,"end_time":"2022-03-08T03:20:06.281118","exception":false,"start_time":"2022-03-08T03:20:05.041797","status":"completed"},"tags":[],"_kg_hide-input":true,"execution":{"iopub.status.busy":"2024-06-06T09:53:38.743454Z","iopub.execute_input":"2024-06-06T09:53:38.743804Z","iopub.status.idle":"2024-06-06T09:53:55.645633Z","shell.execute_reply.started":"2024-06-06T09:53:38.743775Z","shell.execute_reply":"2024-06-06T09:53:55.644705Z"}}
+# %% [code] {"papermill":{"duration":1.239321,"end_time":"2022-03-08T03:20:06.281118","exception":false,"start_time":"2022-03-08T03:20:05.041797","status":"completed"},"tags":[],"_kg_hide-input":true,"execution":{"iopub.status.busy":"2024-06-07T08:20:29.400900Z","iopub.execute_input":"2024-06-07T08:20:29.401181Z","iopub.status.idle":"2024-06-07T08:20:47.581926Z","shell.execute_reply.started":"2024-06-07T08:20:29.401156Z","shell.execute_reply":"2024-06-07T08:20:47.580974Z"},"jupyter":{"outputs_hidden":true}}
 # Create an input layer for the model
 inp = keras.layers.Input(shape=(None, None, 3))
 # Pretrained backbone
@@ -427,10 +410,9 @@ model.compile(optimizer="adam",
 model.summary()
 
 # %% [markdown]
-# # LR Schedule 
-# 
+# # LR Schedule
 
-# %% [code] {"_kg_hide-input":true,"papermill":{"duration":0.510014,"end_time":"2022-03-08T03:20:45.290695","exception":false,"start_time":"2022-03-08T03:20:44.780681","status":"completed"},"tags":[],"execution":{"iopub.status.busy":"2024-06-06T09:53:55.646990Z","iopub.execute_input":"2024-06-06T09:53:55.647535Z","iopub.status.idle":"2024-06-06T09:53:55.657156Z","shell.execute_reply.started":"2024-06-06T09:53:55.647508Z","shell.execute_reply":"2024-06-06T09:53:55.656288Z"}}
+# %% [code] {"_kg_hide-input":true,"papermill":{"duration":0.510014,"end_time":"2022-03-08T03:20:45.290695","exception":false,"start_time":"2022-03-08T03:20:44.780681","status":"completed"},"tags":[],"execution":{"iopub.status.busy":"2024-06-07T08:20:47.583207Z","iopub.execute_input":"2024-06-07T08:20:47.584172Z","iopub.status.idle":"2024-06-07T08:20:47.596517Z","shell.execute_reply.started":"2024-06-07T08:20:47.584138Z","shell.execute_reply":"2024-06-07T08:20:47.595518Z"}}
 import math
 
 def get_lr_callback(batch_size=8, mode='cos', epochs=10, plot=False):
@@ -457,13 +439,13 @@ def get_lr_callback(batch_size=8, mode='cos', epochs=10, plot=False):
 
     return keras.callbacks.LearningRateScheduler(lrfn, verbose=False)  # Create lr callback
 
-# %% [code] {"execution":{"iopub.status.busy":"2024-06-06T09:53:55.658139Z","iopub.execute_input":"2024-06-06T09:53:55.658602Z","iopub.status.idle":"2024-06-06T09:53:55.914411Z","shell.execute_reply.started":"2024-06-06T09:53:55.658577Z","shell.execute_reply":"2024-06-06T09:53:55.913580Z"}}
+# %% [code] {"execution":{"iopub.status.busy":"2024-06-07T08:20:47.598034Z","iopub.execute_input":"2024-06-07T08:20:47.598404Z","iopub.status.idle":"2024-06-07T08:20:47.881208Z","shell.execute_reply.started":"2024-06-07T08:20:47.598374Z","shell.execute_reply":"2024-06-07T08:20:47.880093Z"}}
 lr_cb = get_lr_callback(CFG.batch_size, plot=True)
 
 # %% [markdown]
-# # Model Checkpoint 
+# # Model Checkpoint
 
-# %% [code] {"execution":{"iopub.status.busy":"2024-06-06T09:53:55.915345Z","iopub.execute_input":"2024-06-06T09:53:55.915585Z","iopub.status.idle":"2024-06-06T09:53:55.920084Z","shell.execute_reply.started":"2024-06-06T09:53:55.915563Z","shell.execute_reply":"2024-06-06T09:53:55.919125Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:20:47.882676Z","iopub.execute_input":"2024-06-07T08:20:47.883029Z","iopub.status.idle":"2024-06-07T08:20:47.888912Z","shell.execute_reply.started":"2024-06-07T08:20:47.882995Z","shell.execute_reply":"2024-06-07T08:20:47.887769Z"}}
 ckpt_cb = keras.callbacks.ModelCheckpoint("best_model.weights.h5",
                                          monitor='val_auc',
                                          save_best_only=True,
@@ -471,9 +453,9 @@ ckpt_cb = keras.callbacks.ModelCheckpoint("best_model.weights.h5",
                                          mode='max')
 
 # %% [markdown]
-# # Training 
+# # Training
 
-# %% [code] {"execution":{"iopub.status.busy":"2024-06-06T09:53:55.921319Z","iopub.execute_input":"2024-06-06T09:53:55.922138Z","iopub.status.idle":"2024-06-06T09:58:19.338570Z","shell.execute_reply.started":"2024-06-06T09:53:55.922112Z","shell.execute_reply":"2024-06-06T09:58:19.335375Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T08:20:47.890152Z","iopub.execute_input":"2024-06-07T08:20:47.890533Z","iopub.status.idle":"2024-06-07T09:29:22.961876Z","shell.execute_reply.started":"2024-06-07T08:20:47.890500Z","shell.execute_reply":"2024-06-07T09:29:22.960899Z"}}
 history = model.fit(
     train_ds, 
     validation_data=valid_ds, 
@@ -484,8 +466,9 @@ history = model.fit(
 
 # %% [markdown]
 # ## Result Summary
+# Prépare les DataFrames d'entraînement et de validation et les convertit en DataLoaders TensorFlow prêts pour l'entraînement et la validation du modèle.
 
-# %% [code] {"execution":{"iopub.status.busy":"2024-06-06T09:58:19.341347Z","iopub.status.idle":"2024-06-06T09:58:19.343890Z","shell.execute_reply.started":"2024-06-06T09:58:19.343621Z","shell.execute_reply":"2024-06-06T09:58:19.343642Z"}}
+# %% [code] {"jupyter":{"outputs_hidden":false},"execution":{"iopub.status.busy":"2024-06-07T09:29:22.963505Z","iopub.execute_input":"2024-06-07T09:29:22.963797Z","iopub.status.idle":"2024-06-07T09:29:22.969549Z","shell.execute_reply.started":"2024-06-07T09:29:22.963770Z","shell.execute_reply":"2024-06-07T09:29:22.968462Z"}}
 best_epoch = np.argmax(history.history["val_auc"])
 best_score = history.history["val_auc"][best_epoch]
 print('>>> Best AUC: ', best_score)
